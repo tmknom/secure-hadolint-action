@@ -1,23 +1,52 @@
-name: Rename me
+name: Secure hadolint
 description: |
-  Template repository for creating Composite Action with GitHub Actions.
+  This action securely runs hadolint in a Docker container to lint Dockerfiles.
+  It reduces security risks from compromised or malicious third-party tools (e.g., compromised repositories or tampered container images).
+  To achieve this, it enforces strict container isolation, disables network connections, and drops unnecessary privileges.
 
   ## Usage
 
-  Write usage for your Composite Action.
-
   ```yaml
     steps:
-      - name: Template
-        uses: tmknom/template-composite-action@v0
+      - name: Secure hadolint
+        uses: tmknom/secure-hadolint-action@v0
   ```
 
 runs:
   using: composite
 
   steps:
-    - name: Run
+    - name: Install
+      id: install
       run: |
+        echo "::group::Install"
         set -x
-        echo "Write steps"
+        image="hadolint/hadolint"
+        echo "image=${image}" >> "${GITHUB_OUTPUT}"
+        docker pull "${image}"
+      shell: bash
+
+    - name: Show version
+      env:
+        IMAGE: ${{ steps.install.outputs.image }}
+      run: |
+        echo "::group::Show version"
+        set -x
+        docker run --interactive --rm --read-only --user 1111:1111 \
+          --security-opt no-new-privileges --cap-drop all --network none \
+          "${IMAGE}" hadolint --version
+        echo "::endgroup::"
+      shell: bash
+
+    - name: Run
+      env:
+        IMAGE: ${{ steps.install.outputs.image }}
+      run: |
+        echo "::group::Run"
+        set -x
+        docker run --interactive --rm --read-only --user 1111:1111 \
+          --security-opt no-new-privileges --cap-drop all --network none \
+          --volume "${PWD}:${PWD}" --workdir "${PWD}" \
+          "${IMAGE}" hadolint $(find . -name 'Dockerfile')
+        echo "::endgroup::"
       shell: bash
