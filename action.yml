@@ -47,9 +47,10 @@ runs:
       run: |
         echo "::group::Lint"
         set -x
+        mapfile -t dockerfiles < <(find . -name 'Dockerfile')
         docker run --interactive --rm --read-only --user 1111:1111 \
           --security-opt no-new-privileges --cap-drop all --network none \
           --volume "${PWD}:${PWD}:ro" --workdir "${PWD}" \
-          "${IMAGE}" hadolint $(find . -name 'Dockerfile')
+          "${IMAGE}" hadolint "${dockerfiles[@]}"
         echo "::endgroup::"
       shell: bash
