@@ -41,11 +41,11 @@ runs:
         echo "::endgroup::"
       shell: bash
 
-    - name: Run
+    - name: Lint
       env:
         IMAGE: ${{ steps.install.outputs.image }}
       run: |
-        echo "::group::Run"
+        echo "::group::Lint"
         set -x
         docker run --interactive --rm --read-only --user 1111:1111 \
           --security-opt no-new-privileges --cap-drop all --network none \
