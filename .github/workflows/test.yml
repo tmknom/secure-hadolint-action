@@ -72,3 +72,34 @@ jobs:
         run: |
           set -x
           test "${OUTCOME}" = "failure"
+
+  test-ignore:
+    name: Test ignore
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: tmknom/checkout-action@v1
+
+      - name: Setup
+        run: |
+          set -x
+          cat <<EOF > "./Dockerfile"
+          USER invalid
+          COPY README.md README.md
+          EOF
+
+      - name: Exercise
+        id: exercise
+        uses: ./
+        with:
+          ignore: DL3061 DL3045
+
+      - name: Verify
+        env:
+          OUTCOME: ${{ steps.exercise.outcome }}
+        run: |
+          set -x
+          test "${OUTCOME}" = "success"

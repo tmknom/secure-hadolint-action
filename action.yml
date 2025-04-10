@@ -12,6 +12,11 @@ description: |
         uses: tmknom/secure-hadolint-action@v0
   ```
 
+inputs:
+  ignore:
+    required: false
+    description: Space-separated list of hadolint rule codes to ignore.
+
 runs:
   using: composite
 
@@ -44,13 +49,22 @@ runs:
     - name: Lint
       env:
         IMAGE: ${{ steps.install.outputs.image }}
+        IGNORE: ${{ inputs.ignore }}
       run: |
         echo "::group::Lint"
         set -x
+        declare -a flags=()
+        if [[ "${IGNORE}" != "" ]]; then
+          IFS=$' ' read -ra codes <<< "${IGNORE}"
+          for code in "${codes[@]}"; do
+            flags+=("--ignore" "${code}")
+          done
+        fi
+
         mapfile -t dockerfiles < <(find . -name 'Dockerfile')
         docker run --interactive --rm --read-only --user 1111:1111 \
           --security-opt no-new-privileges --cap-drop all --network none \
           --volume "${PWD}:${PWD}:ro" --workdir "${PWD}" \
-          "${IMAGE}" hadolint "${dockerfiles[@]}"
+          "${IMAGE}" hadolint "${flags[@]}" "${dockerfiles[@]}"
         echo "::endgroup::"
       shell: bash
