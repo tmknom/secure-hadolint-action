@@ -69,8 +69,8 @@ No. The action runs as a non-root, restricted user without privilege escalation.
 
 ### Can I customize the hadolint parameters?
 
-Currently, the action supports only default parameters.
-Customizing parameters would require you to fork and modify the action according to your needs.
+Currently, this action is intentionally designed with secure defaults and does not support custom parameters.
+If you require customization, consider creating your own fork of this action.
 
 ### Does using this action significantly impact my CI/CD performance?
 
