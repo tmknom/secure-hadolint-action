@@ -46,7 +46,7 @@ runs:
         set -x
         docker run --interactive --rm --read-only --user 1111:1111 \
           --security-opt no-new-privileges --cap-drop all --network none \
-          --volume "${PWD}:${PWD}" --workdir "${PWD}" \
+          --volume "${PWD}:${PWD}:ro" --workdir "${PWD}" \
           "${IMAGE}" hadolint $(find . -name 'Dockerfile')
         echo "::endgroup::"
       shell: bash
