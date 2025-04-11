@@ -20,7 +20,9 @@ To achieve this, it enforces strict container isolation, disables network connec
 
 ## Inputs
 
-N/A
+| Name | Description | Default | Required |
+| :--- | :---------- | :------ | :------: |
+| ignore | Space-separated list of hadolint rule codes to ignore. | n/a | no |
 
 ## Outputs
 
