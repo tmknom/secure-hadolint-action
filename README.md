@@ -7,7 +7,9 @@ Run [hadolint][hadolint] in an isolated Docker container to securely lint Docker
 ## Description
 
 This action securely runs hadolint in a Docker container to lint Dockerfiles.
-It reduces security risks from compromised or malicious third-party tools (e.g., compromised repositories or tampered container images).
+It ensures compliance with [Dockerfile Best Practices][best_practices] and also lints Bash scripts within `RUN` instructions using [ShellCheck][shell_check].
+
+This action reduces security risks associated with software supply chain attacks, such as compromised third-party tools or tampered container images.
 To achieve this, it enforces strict container isolation, disables network connections, and drops unnecessary privileges.
 
 ## Usage
@@ -93,4 +95,6 @@ N/A
 See [GitHub Releases][releases].
 
 [hadolint]: https://github.com/hadolint/hadolint
+[best_practices]: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+[shell_check]: https://github.com/koalaman/shellcheck
 [releases]: https://github.com/tmknom/secure-hadolint-action/releases
