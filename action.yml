@@ -18,6 +18,10 @@ inputs:
   ignore:
     required: false
     description: Space-separated list of hadolint rule codes to ignore.
+  failure-threshold:
+    default: info
+    required: false
+    description: Severity level (`error`, `warning`, `info`, `style`, `ignore`, or `none`) at which violations cause the action to fail.
 
 runs:
   using: composite
@@ -52,10 +56,11 @@ runs:
       env:
         IMAGE: ${{ steps.install.outputs.image }}
         IGNORE: ${{ inputs.ignore }}
+        FAILURE_THRESHOLD: ${{ inputs.failure-threshold }}
       run: |
         echo "::group::Lint"
         set -x
-        declare -a flags=()
+        declare -a flags=(--failure-threshold "${FAILURE_THRESHOLD}")
         if [[ "${IGNORE}" != "" ]]; then
           IFS=$' ' read -ra codes <<< "${IGNORE}"
           for code in "${codes[@]}"; do
