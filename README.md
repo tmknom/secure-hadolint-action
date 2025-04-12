@@ -14,10 +14,23 @@ To achieve this, it enforces strict container isolation, disables network connec
 
 ## Usage
 
+### Default
+
 ```yaml
   steps:
     - name: Secure hadolint
       uses: tmknom/secure-hadolint-action@v0
+```
+
+### Custom
+
+```yaml
+  steps:
+    - name: Secure hadolint
+      uses: tmknom/secure-hadolint-action@v0
+      with:
+        ignore: DL3000 DL3004
+        failure-threshold: warning
 ```
 
 ## Inputs
