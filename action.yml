@@ -28,6 +28,9 @@ description: |
   ```
 
 inputs:
+  configuration-path:
+    required: false
+    description: The path for the hadolint configurations.
   ignore:
     required: false
     description: Space-separated list of hadolint rule codes to ignore.
@@ -67,6 +70,7 @@ runs:
 
     - name: Lint
       env:
+        CONFIG_PATH: ${{ inputs.configuration-path }}
         IMAGE: ${{ steps.install.outputs.image }}
         IGNORE: ${{ inputs.ignore }}
         FAILURE_THRESHOLD: ${{ inputs.failure-threshold }}
@@ -74,6 +78,10 @@ runs:
         echo "::group::Lint"
         set -x
         declare -a flags=(--failure-threshold "${FAILURE_THRESHOLD}")
+        if [[ "${CONFIG_PATH}" != "" ]]; then
+          flags+=(--config "${CONFIG_PATH}")
+        fi
+
         if [[ "${IGNORE}" != "" ]]; then
           IFS=$' ' read -ra codes <<< "${IGNORE}"
           for code in "${codes[@]}"; do
