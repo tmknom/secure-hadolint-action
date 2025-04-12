@@ -43,6 +43,46 @@ jobs:
           set -x
           test "${OUTCOME}" = "success"
 
+
+  test-configuration-path:
+    name: Test configuration-path
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: tmknom/checkout-action@v1
+
+      - name: Setup
+        id: setup
+        run: |
+          set -x
+          cat <<EOF > ".github/Dockerfile"
+          USER invalid
+          COPY README.md README.md
+          EOF
+
+          config_file="hadolint.yml"
+          rm -f "${config_file}"
+          cat <<EOF >"${config_file}"
+          ignored: ["DL3061", "DL3045"]
+          EOF
+          echo "path=${config_file}" >> "${GITHUB_OUTPUT}"
+
+      - name: Exercise
+        id: exercise
+        uses: ./
+        with:
+          configuration-path: ${{ steps.setup.outputs.path }}
+
+      - name: Verify
+        env:
+          OUTCOME: ${{ steps.exercise.outcome }}
+        run: |
+          set -x
+          test "${OUTCOME}" = "success"
+
   test-error:
     name: Test error
     runs-on: ubuntu-latest

@@ -37,6 +37,7 @@ To achieve this, it enforces strict container isolation, disables network connec
 
 | Name | Description | Default | Required |
 | :--- | :---------- | :------ | :------: |
+| configuration-path | The path for the hadolint configurations. | n/a | no |
 | failure-threshold | Severity level (`error`, `warning`, `info`, `style`, `ignore`, or `none`) at which violations cause the action to fail. | `info` | no |
 | ignore | Space-separated list of hadolint rule codes to ignore. | n/a | no |
 
