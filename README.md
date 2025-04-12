@@ -76,6 +76,11 @@ This action specifically prevents threats related to software supply chain secur
 - Unauthorized outbound connections from runners, significantly reducing the risk of data leakage
 - Malicious updates or compromised tools exploiting elevated privileges or unrestricted network access
 
+### How does this action ensure the Docker image used for hadolint is secure?
+
+This action explicitly specifies the Docker image using its digest (SHA256).
+Using a digest ensures that exactly the intended and verified image is used every time, eliminating the risk of malicious updates or image tampering.
+
 ### Are network connections permitted inside the Docker container used by this action?
 
 No. Network connections are completely disabled within the container.
