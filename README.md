@@ -19,7 +19,7 @@ To achieve this, it enforces strict container isolation, disables network connec
 ```yaml
   steps:
     - name: Secure hadolint
-      uses: tmknom/secure-hadolint-action@v0
+      uses: tmknom/secure-hadolint-action@6acc3b2cf00010c0c66289914ecf3832b06d0a55 # v0.3.0
 ```
 
 ### Custom
@@ -27,7 +27,7 @@ To achieve this, it enforces strict container isolation, disables network connec
 ```yaml
   steps:
     - name: Secure hadolint
-      uses: tmknom/secure-hadolint-action@v0
+      uses: tmknom/secure-hadolint-action@6acc3b2cf00010c0c66289914ecf3832b06d0a55 # v0.3.0
       with:
         ignore: DL3000 DL3004
         failure-threshold: warning
