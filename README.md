@@ -90,6 +90,25 @@ Even if the tool were compromised or contained malicious code, disabling network
 
 No. The action runs as a non-root, restricted user without privilege escalation.
 
+### Should I pin this action using a commit SHA?
+
+**Yes, strongly recommended.**
+
+To further protect your workflows from unintended or malicious modifications, it's a best practice to pin the action to a specific commit SHA (commit hash).
+Doing so ensures the immutability of both the action’s code and any resources it references, such as Docker images, further reducing the risk of software supply chain attacks.
+
+**Recommended (more secure):**
+
+```yaml
+- uses: tmknom/secure-hadolint-action@6acc3b2cf00010c0c66289914ecf3832b06d0a55 # v0.3.0
+```
+
+**Not recommended:**
+
+```yaml
+- uses: tmknom/secure-hadolint-action@v0
+```
+
 ### Can I customize the hadolint parameters?
 
 Yes. You can customize hadolint parameters through the inputs described in the [Inputs](#inputs) section.
