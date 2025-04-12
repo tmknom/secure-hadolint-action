@@ -115,6 +115,11 @@ Doing so ensures the immutability of both the action’s code and any resources 
 Yes. You can customize hadolint parameters through the inputs described in the [Inputs](#inputs) section.
 See [Custom Usage](#usage) for an example.
 
+For more details on configuring hadolint, refer to the official documentation:
+
+- `configuration-path` input: [hadolint Configure](https://github.com/hadolint/hadolint/blob/master/README.md#configure)
+- `ignore` input: [hadolint Rules](https://github.com/hadolint/hadolint/blob/master/README.md#rules)
+
 This action intentionally limits arbitrary customization to ensure secure, isolated, and predictable execution.
 If you require further customization, consider creating your own fork of this action.
 
