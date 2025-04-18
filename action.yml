@@ -2,27 +2,6 @@ name: Secure hadolint
 description: |
   Securely run hadolint in a Docker container to lint Dockerfiles while mitigating supply chain attacks.
 
-  ## Usage
-
-  ### Default
-
-  ```yaml
-    steps:
-      - name: Secure hadolint
-        uses: tmknom/secure-hadolint-action@1462a50f9d12f500dcde21427e817c4e30560782 # v0.4.0
-  ```
-
-  ### Custom
-
-  ```yaml
-    steps:
-      - name: Secure hadolint
-        uses: tmknom/secure-hadolint-action@1462a50f9d12f500dcde21427e817c4e30560782 # v0.4.0
-        with:
-          ignore: DL3000 DL3004
-          failure-threshold: warning
-  ```
-
 inputs:
   configuration-path:
     required: false
