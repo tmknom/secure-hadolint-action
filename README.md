@@ -2,8 +2,6 @@
 
 Run [hadolint][hadolint] in an isolated Docker container to securely lint Dockerfiles.
 
-<!-- actdocs start -->
-
 ## Description
 
 This action securely runs hadolint in a Docker container to lint Dockerfiles.
@@ -33,6 +31,8 @@ To achieve this, it enforces strict container isolation, disables network connec
         failure-threshold: warning
 ```
 
+<!-- actdocs inputs start -->
+
 ## Inputs
 
 | Name | Description | Default | Required |
@@ -41,11 +41,15 @@ To achieve this, it enforces strict container isolation, disables network connec
 | failure-threshold | Severity level (`error`, `warning`, `info`, `style`, `ignore`, or `none`) at which violations cause the action to fail. | `info` | no |
 | ignore | Space-separated list of hadolint rule codes to ignore. | n/a | no |
 
+<!-- actdocs inputs end -->
+
+<!-- actdocs outputs start -->
+
 ## Outputs
 
 N/A
 
-<!-- actdocs end -->
+<!-- actdocs outputs end -->
 
 ## Permissions
 
