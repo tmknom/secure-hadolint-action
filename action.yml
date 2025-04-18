@@ -92,3 +92,7 @@ runs:
           "${IMAGE}" hadolint "${flags[@]}" "${dockerfiles[@]}"
         echo "::endgroup::"
       shell: bash
+
+branding:
+  icon: check
+  color: purple
