@@ -17,7 +17,7 @@ To achieve this, it enforces strict container isolation, disables network connec
 ```yaml
   steps:
     - name: Secure hadolint
-      uses: tmknom/secure-hadolint-action@1462a50f9d12f500dcde21427e817c4e30560782 # v0.4.0
+      uses: tmknom/secure-hadolint-action@bc9a12ff7ee12b95e2a4e43bcb01d86545843688 # v0.4.2
 ```
 
 ### Custom
@@ -25,7 +25,7 @@ To achieve this, it enforces strict container isolation, disables network connec
 ```yaml
   steps:
     - name: Secure hadolint
-      uses: tmknom/secure-hadolint-action@1462a50f9d12f500dcde21427e817c4e30560782 # v0.4.0
+      uses: tmknom/secure-hadolint-action@bc9a12ff7ee12b95e2a4e43bcb01d86545843688 # v0.4.2
       with:
         ignore: DL3000 DL3004
         failure-threshold: warning
@@ -105,7 +105,7 @@ Doing so ensures the immutability of both the action’s code and any resources 
 **Recommended (more secure):**
 
 ```yaml
-- uses: tmknom/secure-hadolint-action@1462a50f9d12f500dcde21427e817c4e30560782 # v0.4.0
+- uses: tmknom/secure-hadolint-action@bc9a12ff7ee12b95e2a4e43bcb01d86545843688 # v0.4.2
 ```
 
 **Not recommended:**
